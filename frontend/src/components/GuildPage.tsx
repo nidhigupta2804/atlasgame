@@ -4,41 +4,36 @@ import { Avatar, AvatarFallback } from './ui/avatar';
 import { Badge } from './ui/badge';
 import { Progress } from './ui/progress';
 import '../styles/guild.css';
+import { useSelectors } from '../state/store';
 
 export default function GuildPage() {
+  const { currentGuild, state, countriesOwnedByGuild, guildLeaderboard } = useSelectors();
+  if (!currentGuild) return null;
+
+  const members = state.users
+    .filter(u => u.guildId === currentGuild.id)
+    .map(u => ({ name: u.name, role: 'Member', points: u.totalPoints, status: 'online', tasksThisWeek: 0 }));
+
+  const owned = countriesOwnedByGuild(currentGuild.id);
+  const topCountries = owned
+    .map(c => ({
+      name: c.name,
+      points: c.investments[currentGuild.id] || 0,
+      status: 'secure',
+    }))
+    .sort((a, b) => b.points - a.points)
+    .slice(0, 5);
+
+  const rank = guildLeaderboard.findIndex(e => e.guild.id === currentGuild.id) + 1 || 0;
   const guildInfo = {
-    name: 'HR Heroes',
-    color: '#8B5CF6',
-    rank: 2,
-    totalPoints: 14890,
-    countries: 48,
-    members: 28,
-    weeklyGrowth: 12,
+    name: currentGuild.name,
+    color: currentGuild.color,
+    rank,
+    totalPoints: currentGuild.totalPoints,
+    countries: owned.length,
+    members: members.length,
+    weeklyGrowth: 0,
   };
-
-  const members = [
-    { name: 'Sarah Chen', role: 'Guild Leader', points: 2340, status: 'online', tasksThisWeek: 24 },
-    { name: 'Marcus Rivera', role: 'Member', points: 1890, status: 'online', tasksThisWeek: 18 },
-    { name: 'Jennifer Lee', role: 'Member', points: 1650, status: 'offline', tasksThisWeek: 15 },
-    { name: 'Robert Johnson', role: 'Member', points: 1420, status: 'online', tasksThisWeek: 12 },
-    { name: 'Michelle Davis', role: 'Member', points: 1380, status: 'online', tasksThisWeek: 14 },
-    { name: 'Kevin Brown', role: 'Member', points: 1210, status: 'offline', tasksThisWeek: 11 },
-  ];
-
-  const topCountries = [
-    { name: 'United States', points: 1250, status: 'secure' },
-    { name: 'France', points: 760, status: 'secure' },
-    { name: 'Australia', points: 890, status: 'contested' },
-    { name: 'India', points: 650, status: 'contested' },
-    { name: 'Brazil', points: 540, status: 'at-risk' },
-  ];
-
-  const recentActivity = [
-    { player: 'Sarah Chen', action: 'completed task', task: 'Process Applications', points: 50, time: '5m ago' },
-    { player: 'Marcus Rivera', action: 'invested in', task: 'Canada', points: 100, time: '12m ago' },
-    { player: 'Jennifer Lee', action: 'completed task', task: 'Update Records', points: 30, time: '1h ago' },
-    { player: 'Robert Johnson', action: 'invested in', task: 'Mexico', points: 75, time: '2h ago' },
-  ];
 
   return (
     <div className="guild-page">
@@ -229,38 +224,7 @@ export default function GuildPage() {
         </div>
 
         {/* Recent Activity */}
-        <Card className="guild-activity-card">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-gray-900">
-              <Zap className="w-5 h-5 text-indigo-600" />
-              Recent Guild Activity
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {recentActivity.map((activity, idx) => (
-                <div key={idx} className="guild-activity-item">
-                  <div className="flex items-center gap-3">
-                    <Avatar className="guild-activity-avatar">
-                      <AvatarFallback className="guild-activity-avatar-fallback">
-                        {activity.player.split(' ').map(n => n[0]).join('')}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="text-sm">
-                      <span className="text-gray-900">{activity.player}</span>
-                      <span className="text-gray-500"> {activity.action} </span>
-                      <span className="text-gray-900">{activity.task}</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-sm text-indigo-600">+{activity.points}</span>
-                    <span className="text-sm text-gray-500">{activity.time}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        {/* Optional: Recent Activity placeholder removed in MVP */}
       </div>
     </div>
   );

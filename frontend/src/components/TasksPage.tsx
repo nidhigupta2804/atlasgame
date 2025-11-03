@@ -4,60 +4,16 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Progress } from './ui/progress';
 import '../styles/tasks.css';
+import { useStore } from '../state/store';
 
 export default function TasksPage() {
-  const mockTasks = [
-    {
-      id: 1,
-      title: 'Process New Student Applications',
-      description: 'Review and process 10 new student applications',
-      points: 50,
-      category: 'Admissions',
-      difficulty: 'Easy',
-      timeEstimate: '15 min',
-      completed: false,
-    },
-    {
-      id: 2,
-      title: 'Update Employee Records',
-      description: 'Update contact information for 5 employees',
-      points: 30,
-      category: 'HR',
-      difficulty: 'Easy',
-      timeEstimate: '10 min',
-      completed: false,
-    },
-    {
-      id: 3,
-      title: 'Review Budget Report',
-      description: 'Analyze and approve departmental budget reports',
-      points: 100,
-      category: 'Finance',
-      difficulty: 'Hard',
-      timeEstimate: '45 min',
-      completed: false,
-    },
-    {
-      id: 4,
-      title: 'IT Help Desk Tickets',
-      description: 'Resolve 3 help desk tickets',
-      points: 40,
-      category: 'IT',
-      difficulty: 'Medium',
-      timeEstimate: '20 min',
-      completed: false,
-    },
-    {
-      id: 5,
-      title: 'Data Entry - Course Catalog',
-      description: 'Enter 20 new courses into the system',
-      points: 60,
-      category: 'Admissions',
-      difficulty: 'Medium',
-      timeEstimate: '30 min',
-      completed: true,
-    },
-  ];
+  const { state, completeTask } = useStore();
+  const tasks = state.tasks.map(t => ({
+    ...t,
+    // Basic UI hints
+    difficulty: t.points >= 80 ? 'Hard' : t.points >= 40 ? 'Medium' : 'Easy',
+    timeEstimate: t.points >= 80 ? '45 min' : t.points >= 40 ? '20 min' : '10 min',
+  }));
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -171,22 +127,19 @@ export default function TasksPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {mockTasks.map((task) => (
+              {tasks.map((task) => (
                 <div
                   key={task.id}
                   className={`tasks-item ${
-                    task.completed 
-                      ? 'tasks-item-completed' 
-                      : 'tasks-item-available'
+                    'tasks-item-available'
                   }`}
                 >
                   <div className="tasks-item-content">
                     <div className="flex-1 space-y-3">
                       <div className="flex items-center gap-2">
                         <h4 className="text-white">{task.title}</h4>
-                        {task.completed && <CheckCircle2 className="w-5 h-5 text-emerald-400" />}
                       </div>
-                      <p className="text-sm text-gray-300">{task.description}</p>
+                      <p className="text-sm text-gray-300">Earn points for your guild</p>
                       <div className="tasks-badges">
                         <Badge 
                           variant="outline" 
@@ -213,13 +166,10 @@ export default function TasksPage() {
                       </div>
                       <Button 
                         size="sm" 
-                        disabled={task.completed}
-                        className={task.completed 
-                          ? '' 
-                          : 'bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500'
-                        }
+                        className={'bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500'}
+                        onClick={() => completeTask(task.id)}
                       >
-                        {task.completed ? 'Completed' : 'Start Task'}
+                        Start Task
                       </Button>
                     </div>
                   </div>

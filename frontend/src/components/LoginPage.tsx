@@ -27,28 +27,29 @@ const DEMO_USERS = [
   { id: 8, name: 'Nina Patel', guild: 'admissions' },
 ];
 
-interface LoginPageProps {
-  onLogin: () => void;
-}
+import { useStore } from '../state/store';
 
-export default function LoginPage({ onLogin }: LoginPageProps) {
+export default function LoginPage() {
   const navigate = useNavigate();
+  const { login } = useStore();
   const [selectedGuild, setSelectedGuild] = useState('');
   const [selectedUser, setSelectedUser] = useState('');
 
   const handleDemoLogin = () => {
     if (selectedUser) {
-      console.log('Demo login:', selectedUser);
-      onLogin();
+      login(parseInt(selectedUser, 10));
       navigate('/dashboard');
     }
   };
 
   const handleRealLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Real login submitted');
-    onLogin();
-    navigate('/dashboard');
+    // For demo, just take first user of selected guild or user 1
+    const fallbackUser = DEMO_USERS.find(u => (selectedGuild ? u.guild === selectedGuild : true));
+    if (fallbackUser) {
+      login(fallbackUser.id);
+      navigate('/dashboard');
+    }
   };
 
   const filteredUsers = selectedGuild

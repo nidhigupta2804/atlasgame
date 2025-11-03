@@ -3,25 +3,20 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import '../styles/leaderboard.css';
+import { useSelectors } from '../state/store';
 
 export default function LeaderboardPage() {
-  const guildLeaderboard = [
-    { rank: 1, name: 'IT Innovators', color: '#3B82F6', countries: 52, points: 15420, members: 34 },
-    { rank: 2, name: 'HR Heroes', color: '#8B5CF6', countries: 48, points: 14890, members: 28 },
-    { rank: 3, name: 'Finance Falcons', color: '#10B981', countries: 45, points: 13200, members: 31 },
-    { rank: 4, name: 'Admissions Avengers', color: '#F59E0B', countries: 42, points: 12100, members: 25 },
-  ];
-
-  const playerLeaderboard = [
-    { rank: 1, name: 'Sarah Chen', guild: 'HR Heroes', guildColor: '#8B5CF6', points: 2340, tasksCompleted: 156 },
-    { rank: 2, name: 'Alex Kumar', guild: 'IT Innovators', guildColor: '#3B82F6', points: 2280, tasksCompleted: 148 },
-    { rank: 3, name: 'Emily Watson', guild: 'Finance Falcons', guildColor: '#10B981', points: 2150, tasksCompleted: 142 },
-    { rank: 4, name: 'David Chang', guild: 'Admissions Avengers', guildColor: '#F59E0B', points: 1980, tasksCompleted: 134 },
-    { rank: 5, name: 'Marcus Rivera', guild: 'HR Heroes', guildColor: '#8B5CF6', points: 1890, tasksCompleted: 128 },
-    { rank: 6, name: 'Rachel Foster', guild: 'IT Innovators', guildColor: '#3B82F6', points: 1820, tasksCompleted: 125 },
-    { rank: 7, name: 'James Park', guild: 'Finance Falcons', guildColor: '#10B981', points: 1750, tasksCompleted: 119 },
-    { rank: 8, name: 'Nina Patel', guild: 'Admissions Avengers', guildColor: '#F59E0B', points: 1680, tasksCompleted: 115 },
-  ];
+  const { guildLeaderboard, state } = useSelectors();
+  const playerLeaderboard = state.users
+    .map(u => ({
+      name: u.name,
+      points: u.totalPoints,
+      guild: state.guilds.find(g => g.id === u.guildId)?.name || 'Unknown',
+      guildColor: state.guilds.find(g => g.id === u.guildId)?.color || '#9CA3AF',
+    }))
+    .sort((a, b) => b.points - a.points)
+    .slice(0, 8)
+    .map((p, idx) => ({ rank: idx + 1, tasksCompleted: 0, ...p }));
 
   const getRankIcon = (rank: number) => {
     switch (rank) {
@@ -77,15 +72,15 @@ export default function LeaderboardPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {guildLeaderboard.map((guild) => (
+                  {guildLeaderboard.map((entry, index) => (
                     <div
-                      key={guild.rank}
+                      key={entry.guild.id}
                       className={`leaderboard-guild-item ${
-                        guild.rank === 1 
+                        index + 1 === 1 
                           ? 'leaderboard-guild-item-first' 
-                          : guild.rank === 2
+                          : index + 1 === 2
                           ? 'leaderboard-guild-item-second'
-                          : guild.rank === 3
+                          : index + 1 === 3
                           ? 'leaderboard-guild-item-third'
                           : 'leaderboard-guild-item-default'
                       }`}
@@ -93,27 +88,27 @@ export default function LeaderboardPage() {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                           <div className="w-12 text-center">
-                            {getRankIcon(guild.rank)}
+                            {getRankIcon(index + 1)}
                           </div>
                           <div className="flex items-center gap-3">
                             <div 
                               className="w-5 h-5 rounded-full shadow-md" 
-                              style={{ backgroundColor: guild.color }} 
+                              style={{ backgroundColor: entry.guild.color }} 
                             />
                             <div>
                               <div className="flex items-center gap-2">
-                                <span className="text-gray-900">{guild.name}</span>
-                                {guild.rank === 1 && (
+                                <span className="text-gray-900">{entry.guild.name}</span>
+                                {index + 1 === 1 && (
                                   <TrendingUp className="w-4 h-4 text-emerald-400" />
                                 )}
                               </div>
-                              <p className="text-sm text-gray-700">{guild.members} members</p>
+                              <p className="text-sm text-gray-700">{state.users.filter(u => u.guildId === entry.guild.id).length} members</p>
                             </div>
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-gray-900">{guild.points.toLocaleString()} pts</div>
-                          <p className="text-sm text-gray-700">{guild.countries} countries</p>
+                          <div className="text-gray-900">{entry.points.toLocaleString()} pts</div>
+                          <p className="text-sm text-gray-700">{entry.countries} countries</p>
                         </div>
                       </div>
                     </div>

@@ -1,15 +1,16 @@
 import { Globe, Home, ListTodo, Trophy, Users, User } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from './ui/button';
+import { useStore } from '../state/store';
 
 interface NavigationProps {
   isLoggedIn: boolean;
-  onLogin?: () => void;
 }
 
-export default function Navigation({ isLoggedIn, onLogin }: NavigationProps) {
+export default function Navigation({ isLoggedIn }: NavigationProps) {
   const location = useLocation();
   const currentPath = location.pathname;
+  const { logout, state } = useStore();
 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Globe, path: '/dashboard' },
@@ -54,11 +55,17 @@ export default function Navigation({ isLoggedIn, onLogin }: NavigationProps) {
                 </Link>
               );
             })}
+            <Button 
+              variant={isHomePage ? 'ghost' : 'ghost'}
+              className={isHomePage ? 'text-white hover:bg-white/10' : 'hover:bg-gray-100'}
+              onClick={logout}
+            >
+              Logout
+            </Button>
           </div>
         ) : (
           <Link to="/login">
             <Button 
-              onClick={onLogin} 
               className={`${isHomePage ? 'bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] border border-indigo-400/30' : 'bg-indigo-600 hover:bg-indigo-700'}`}
             >
               Login

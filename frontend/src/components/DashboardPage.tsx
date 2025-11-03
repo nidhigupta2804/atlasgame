@@ -2,23 +2,14 @@ import { Globe, Trophy, Target, Users, TrendingUp, Zap } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import '../styles/dashboard.css';
+import { useSelectors } from '../state/store';
+import CountriesList from './CountriesList';
 
 export default function DashboardPage() {
-  const mockCountries = [
-    { name: 'United States', guild: 'HR Heroes', color: '#8B5CF6', points: 1250 },
-    { name: 'Canada', guild: 'Finance Falcons', color: '#10B981', points: 890 },
-    { name: 'United Kingdom', guild: 'IT Innovators', color: '#3B82F6', points: 1100 },
-    { name: 'France', guild: 'HR Heroes', color: '#8B5CF6', points: 760 },
-    { name: 'Germany', guild: 'Admissions Avengers', color: '#F59E0B', points: 950 },
-    { name: 'Japan', guild: 'IT Innovators', color: '#3B82F6', points: 1400 },
-  ];
-
-  const guildStats = [
-    { name: 'HR Heroes', color: '#8B5CF6', countries: 2, points: 2010 },
-    { name: 'Finance Falcons', color: '#10B981', countries: 1, points: 890 },
-    { name: 'IT Innovators', color: '#3B82F6', countries: 2, points: 2500 },
-    { name: 'Admissions Avengers', color: '#F59E0B', countries: 1, points: 950 },
-  ];
+  const { state, currentGuild, guildLeaderboard } = useSelectors();
+  const totalCountries = state.countries.length;
+  const controlledTotal = state.countries.filter(c => c.ownerGuildId).length;
+  const currentRank = currentGuild ? guildLeaderboard.findIndex(e => e.guild.id === currentGuild.id) + 1 : 0;
 
   return (
     <div className="dashboard-page">
@@ -47,7 +38,7 @@ export default function DashboardPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl text-white">195</div>
+              <div className="text-3xl text-white">{totalCountries}</div>
               <p className="text-sm text-gray-300 mt-1">Available territories</p>
             </CardContent>
           </Card>
@@ -62,7 +53,7 @@ export default function DashboardPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl text-white">48</div>
+              <div className="text-3xl text-white">{controlledTotal}</div>
               <p className="text-sm text-gray-300 mt-1">Countries claimed</p>
             </CardContent>
           </Card>
@@ -77,7 +68,7 @@ export default function DashboardPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl text-white">#2</div>
+              <div className="text-3xl text-white">{currentGuild ? `#${currentRank || '-'}` : '-'}</div>
               <p className="text-sm text-gray-300 mt-1">
                 <TrendingUp className="w-3 h-3 inline mr-1" />
                 Moving up
@@ -134,23 +125,21 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {guildStats
-                  .sort((a, b) => b.points - a.points)
-                  .map((guild, idx) => (
+                {guildLeaderboard.map((entry, idx) => (
                   <div key={idx} className="dashboard-guild-item">
                     <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 border-2" style={{ borderColor: guild.color }}>
+                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 border-2" style={{ borderColor: entry.guild.color }}>
                         <span className="text-sm text-white">#{idx + 1}</span>
                       </div>
                       <div>
-                        <div className="text-sm text-white">{guild.name}</div>
+                        <div className="text-sm text-white">{entry.guild.name}</div>
                         <div className="text-xs text-gray-300">
-                          {guild.countries} {guild.countries === 1 ? 'country' : 'countries'}
+                          {entry.countries} {entry.countries === 1 ? 'country' : 'countries'}
                         </div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-sm text-white">{guild.points}</div>
+                      <div className="text-sm text-white">{entry.points}</div>
                       <div className="text-xs text-gray-300">points</div>
                     </div>
                   </div>
@@ -160,36 +149,10 @@ export default function DashboardPage() {
           </Card>
         </div>
 
-        {/* Recent Activity */}
-        <Card className="dashboard-activity-card mt-6">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white">
-              <Zap className="w-5 h-5 text-indigo-400" />
-              Recently Conquered Countries
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              {mockCountries.map((country, idx) => (
-                <div key={idx} className="dashboard-activity-item">
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 rounded-full shadow-md" style={{ backgroundColor: country.color }} />
-                    <span className="text-white">{country.name}</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Badge 
-                      variant="secondary" 
-                      className="bg-indigo-500/30 text-white hover:bg-indigo-500/40 border border-white/20"
-                    >
-                      {country.guild}
-                    </Badge>
-                    <span className="text-sm text-gray-300">{country.points} points</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        {/* Countries List */}
+        <div className="mt-6">
+          <CountriesList />
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useState } from 'react';
 import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
 import DashboardPage from './components/DashboardPage';
@@ -8,24 +7,21 @@ import LeaderboardPage from './components/LeaderboardPage';
 import GuildPage from './components/GuildPage';
 import ProfilePage from './components/ProfilePage';
 import Navigation from './components/Navigation';
+import { useStore } from './state/store';
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
+  const { state, ready } = useStore();
+  const isLoggedIn = !!state.currentUserId;
 
   return (
     <HashRouter>
       <div className="app-root">
         <Navigation 
           isLoggedIn={isLoggedIn}
-          onLogin={handleLogin}
         />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route 
             path="/dashboard" 
             element={isLoggedIn ? <DashboardPage /> : <Navigate to="/login" replace />} 
