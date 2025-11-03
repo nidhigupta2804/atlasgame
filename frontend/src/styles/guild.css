@@ -1,0 +1,262 @@
+/* GuildPage Styles */
+.guild-page {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #1e293b, #334155, #475569);
+  padding-top: 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Global text color overrides for dark background */
+.guild-page h1,
+.guild-page h2,
+.guild-page h3,
+.guild-page h4,
+.guild-page h5,
+.guild-page h6,
+.guild-page p,
+.guild-page span,
+.guild-page div {
+  color: white;
+}
+
+.guild-page .text-gray-500,
+.guild-page .text-gray-600,
+.guild-page .text-gray-700 {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.guild-page .text-gray-900 {
+  color: white !important;
+}
+
+.guild-container {
+  padding: 1.5rem;
+}
+
+.guild-header-card {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s ease;
+}
+
+.guild-header-card:hover {
+  box-shadow: 0 20px 60px -10px rgba(99, 102, 241, 0.4);
+}
+
+.guild-header-content {
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .guild-header-content {
+    flex-direction: row;
+  }
+}
+
+.guild-icon-wrapper {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.guild-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .guild-stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.guild-stat-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px -5px rgba(99, 102, 241, 0.2);
+}
+
+.guild-stat-card-indigo {
+  border: 1px solid rgba(199, 210, 254, 0.3);
+}
+
+.guild-stat-card-blue {
+  border: 1px solid rgba(191, 219, 254, 0.3);
+}
+
+.guild-stat-card-cyan {
+  border: 1px solid rgba(165, 243, 252, 0.3);
+}
+
+.guild-stat-card:hover {
+  box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.4);
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.guild-stat-icon-wrapper {
+  padding: 0.375rem;
+  border-radius: 0.5rem;
+}
+
+.guild-stat-icon-indigo {
+  background-color: rgb(224, 231, 255);
+}
+
+.guild-stat-icon-blue {
+  background-color: rgb(219, 234, 254);
+}
+
+.guild-stat-icon-cyan {
+  background-color: rgb(207, 250, 254);
+}
+
+.guild-main-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .guild-main-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.guild-members-card {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s ease;
+}
+
+.guild-members-card:hover {
+  box-shadow: 0 20px 60px -10px rgba(99, 102, 241, 0.4);
+}
+
+@media (min-width: 1024px) {
+  .guild-members-card {
+    grid-column: span 2 / span 2;
+  }
+}
+
+.guild-member-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.guild-member-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateX(4px);
+}
+
+.guild-member-avatar {
+  border: 2px solid rgb(199, 210, 254);
+}
+
+.guild-member-avatar-fallback {
+  background-color: rgb(224, 231, 255);
+  color: rgb(67, 56, 202);
+}
+
+.guild-member-online {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: rgb(16, 185, 129);
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
+}
+
+.guild-member-offline {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: rgb(209, 213, 219);
+}
+
+.guild-countries-card {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s ease;
+}
+
+.guild-countries-card:hover {
+  box-shadow: 0 20px 60px -10px rgba(99, 102, 241, 0.4);
+}
+
+.guild-country-item {
+  margin-bottom: 1rem;
+}
+
+.guild-country-item:last-child {
+  margin-bottom: 0;
+}
+
+.guild-activity-card {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s ease;
+}
+
+.guild-activity-card:hover {
+  box-shadow: 0 20px 60px -10px rgba(99, 102, 241, 0.4);
+}
+
+.guild-activity-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.guild-activity-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateX(4px);
+}
+
+.guild-activity-avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 2px solid rgb(199, 210, 254);
+}
+
+.guild-activity-avatar-fallback {
+  font-size: 0.75rem;
+  background-color: rgb(224, 231, 255);
+  color: rgb(67, 56, 202);
+}

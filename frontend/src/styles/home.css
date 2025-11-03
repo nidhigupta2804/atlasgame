@@ -1,0 +1,78 @@
+/* HomePage Styles */
+.home-page {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #0f172a, #1e293b, #334155, #1e3a8a);
+}
+
+.home-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 6rem;
+}
+
+.home-orb-1 {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 24rem;
+  height: 24rem;
+  background-color: rgba(37, 99, 235, 0.2);
+  border-radius: 9999px;
+  filter: blur(64px);
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+.home-orb-2 {
+  position: absolute;
+  bottom: 25%;
+  right: 25%;
+  width: 24rem;
+  height: 24rem;
+  background-color: rgba(79, 70, 229, 0.2);
+  border-radius: 9999px;
+  filter: blur(64px);
+  animation: pulse-slow 4s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.home-content {
+  position: relative;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  text-align: center;
+  z-index: 10;
+  width: 100%;
+}
+
+.home-stats-indicator {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: rgb(203, 213, 225);
+  border-radius: 9999px;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.home-feature-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.home-feature-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.home-footer {
+  background-color: rgb(2, 6, 23);
+  color: rgb(148, 163, 184);
+  padding: 3rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}

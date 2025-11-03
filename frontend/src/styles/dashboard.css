@@ -1,0 +1,197 @@
+/* DashboardPage Styles */
+.dashboard-page {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #1e293b, #334155, #475569);
+  padding-top: 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-container {
+  padding: 1.5rem;
+}
+
+.dashboard-header {
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-header-title {
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-header-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Global text color overrides for dark background */
+.dashboard-page h1,
+.dashboard-page h2,
+.dashboard-page h3,
+.dashboard-page h4,
+.dashboard-page h5,
+.dashboard-page h6,
+.dashboard-page p,
+.dashboard-page span,
+.dashboard-page div {
+  color: white;
+}
+
+.dashboard-page .text-gray-500,
+.dashboard-page .text-gray-600,
+.dashboard-page .text-gray-700 {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.dashboard-page .text-gray-900 {
+  color: white !important;
+}
+
+.dashboard-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .dashboard-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.dashboard-stat-card {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px -5px rgba(99, 102, 241, 0.2);
+}
+
+.dashboard-stat-card:hover {
+  box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.4);
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dashboard-stat-icon-wrapper {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.dashboard-stat-icon-indigo {
+  background-color: rgb(224, 231, 255);
+}
+
+.dashboard-stat-icon-blue {
+  background-color: rgb(219, 234, 254);
+}
+
+.dashboard-stat-icon-cyan {
+  background-color: rgb(207, 250, 254);
+}
+
+.dashboard-main-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .dashboard-main-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.dashboard-map-card {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s ease;
+}
+
+.dashboard-map-card:hover {
+  box-shadow: 0 20px 60px -10px rgba(99, 102, 241, 0.4);
+}
+
+@media (min-width: 1024px) {
+  .dashboard-map-card {
+    grid-column: span 2 / span 2;
+  }
+}
+
+.dashboard-map-placeholder {
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(to bottom right, rgba(238, 242, 255, 0.3), rgba(219, 234, 254, 0.3), rgba(207, 250, 254, 0.3));
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+}
+
+.dashboard-guild-card {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s ease;
+}
+
+.dashboard-guild-card:hover {
+  box-shadow: 0 20px 60px -10px rgba(99, 102, 241, 0.4);
+}
+
+.dashboard-guild-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.dashboard-guild-item:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(4px);
+}
+
+.dashboard-activity-card {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s ease;
+}
+
+.dashboard-activity-card:hover {
+  box-shadow: 0 20px 60px -10px rgba(99, 102, 241, 0.4);
+}
+
+.dashboard-activity-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.dashboard-activity-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateX(4px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
