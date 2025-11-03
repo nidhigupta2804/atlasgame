@@ -53,7 +53,16 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     const user = state.users.find(u => u.id === userId);
     if (!user) return;
     localStorage.setItem('atlasgame:currentUserId', String(userId));
-    sync({ ...state, currentUserId: userId });
+    const next = structuredClone(state);
+    // Demo-friendly: seed some starting points if user has none
+    const nu = next.users.find(u => u.id === userId)!;
+    if (nu.totalPoints <= 0) {
+      nu.totalPoints = 1000;
+      const ng = next.guilds.find(g => g.id === nu.guildId)!;
+      ng.totalPoints += 1000;
+    }
+    next.currentUserId = userId;
+    sync(next);
   };
 
   const logout = () => {

@@ -19,6 +19,19 @@ export default function WorldMap() {
 
   return (
     <div className="w-full rounded-lg overflow-hidden border border-white/10" style={{ height: 480 }}>
+      <style>
+        {`
+          .leaflet-popup-content-wrapper {
+            background-color: #111827 !important;
+            color: #ffffff !important;
+          }
+          .leaflet-popup-tip {
+            background-color: #111827 !important;
+          }
+          .leaflet-popup-content { color: #ffffff !important; }
+          .leaflet-popup-close-button { color: #ffffff !important; }
+        `}
+      </style>
       <MapContainer center={[20, 0]} zoom={2} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
         <TileLayer
           attribution='&copy; OpenStreetMap contributors'
@@ -37,7 +50,7 @@ export default function WorldMap() {
               pathOptions={{ color, fillColor: color, fillOpacity: 0.7 }}
             >
               <Popup>
-                <div style={{ color: '#111827' }}>
+                <div>
                   <div style={{ fontWeight: 600 }}>{c.name}</div>
                   <div>{owner ? `Owned by ${owner.name}` : 'Unclaimed'}</div>
                 </div>

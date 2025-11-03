@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from '../../components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '../../components/ui/dialog';
-import { Input } from '../../components/ui/input';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 import { useStore } from '../../state/store';
 
 interface InvestModalProps {
@@ -34,14 +33,34 @@ export default function InvestModal({ open, onOpenChange, countryId, countryName
     }
   };
 
+  if (!open) return null;
+
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Invest Points {countryName ? `in ${countryName}` : ''}</DialogTitle>
-        </DialogHeader>
-        <div className="space-y-3">
-          <div className="text-sm text-gray-600">Available: {max} pts</div>
+    <div style={{ position: 'fixed', inset: 0, zIndex: 3000 }}>
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)' }} onClick={() => onOpenChange(false)} />
+      <div
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 'min(560px, calc(100% - 2rem))',
+          background: '#111827',
+          color: '#ffffff',
+          borderRadius: 12,
+          boxShadow: '0 20px 50px rgba(0,0,0,0.4)',
+          padding: '20px',
+          border: '1px solid #1f2937',
+        }}
+        role="dialog"
+        aria-modal="true"
+      >
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+          <div style={{ fontWeight: 700 }}>Invest Points {countryName ? `in ${countryName}` : ''}</div>
+          <button onClick={() => onOpenChange(false)} style={{ color: '#ffffff' }}>✕</button>
+        </div>
+        <div style={{ display: 'grid', gap: 12 }}>
+          <div className="text-sm" style={{ color: '#e5e7eb' }}>Available: {max} pts</div>
           <Input
             type="number"
             min={0}
@@ -49,14 +68,15 @@ export default function InvestModal({ open, onOpenChange, countryId, countryName
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="Enter points to invest"
+            className="bg-white text-gray-900"
           />
         </div>
-        <DialogFooter>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 16 }}>
           <Button variant="ghost" onClick={() => onOpenChange(false)}>Cancel</Button>
           <Button onClick={onConfirm} disabled={numeric <= 0}>Invest</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </div>
+      </div>
+    </div>
   );
 }
 
