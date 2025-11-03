@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
@@ -20,7 +20,7 @@ export default function CountriesList() {
       .sort((a, b) => a.name.localeCompare(b.name));
   }, [state.countries, query]);
 
-  const ownerFor = (guildId: string | null) => (guildId ? state.guilds.find(g => g.id === guildId) : null);
+  const ownerFor = (guildId: string | null) => (guildId ? (state.guilds.find(g => g.id === guildId) || null) : null);
 
   const openInvest = (id: string, name: string) => {
     setSelectedCountry({ id, name });
