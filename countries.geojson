@@ -1,0 +1,87 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "id": "usa", "name": "United States" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-125, 24], [-66, 24], [-66, 49], [-125, 49], [-125, 24]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "can", "name": "Canada" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-141, 49], [-52, 49], [-52, 70], [-141, 70], [-141, 49]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "gbr", "name": "United Kingdom" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-8, 49.8], [2, 49.8], [2, 58.8], [-8, 58.8], [-8, 49.8]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "fra", "name": "France" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-5.5, 42.5], [8.5, 42.5], [8.5, 51.5], [-5.5, 51.5], [-5.5, 42.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "deu", "name": "Germany" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [5, 47], [15.5, 47], [15.5, 55], [5, 55], [5, 47]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "jpn", "name": "Japan" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [129, 31], [146, 31], [146, 46], [129, 46], [129, 31]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "ind", "name": "India" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [68, 8], [97.5, 8], [97.5, 35], [68, 35], [68, 8]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "bra", "name": "Brazil" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-74, -34], [-34, -34], [-34, 6], [-74, 6], [-74, -34]
+        ]]
+      }
+    }
+  ]
+}
+
+

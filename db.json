@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "guilds": [
+    { "id": "hr", "name": "HR Heroes", "color": "#8B5CF6", "totalPoints": 0 },
+    { "id": "finance", "name": "Finance Falcons", "color": "#10B981", "totalPoints": 0 },
+    { "id": "it", "name": "IT Innovators", "color": "#3B82F6", "totalPoints": 0 },
+    { "id": "admissions", "name": "Admissions Avengers", "color": "#F59E0B", "totalPoints": 0 }
+  ],
+  "users": [
+    { "id": 1, "name": "Sarah Chen", "guildId": "hr", "totalPoints": 0 },
+    { "id": 2, "name": "Marcus Rivera", "guildId": "hr", "totalPoints": 0 },
+    { "id": 3, "name": "Emily Watson", "guildId": "finance", "totalPoints": 0 },
+    { "id": 4, "name": "James Park", "guildId": "finance", "totalPoints": 0 },
+    { "id": 5, "name": "Alex Kumar", "guildId": "it", "totalPoints": 0 },
+    { "id": 6, "name": "Rachel Foster", "guildId": "it", "totalPoints": 0 },
+    { "id": 7, "name": "David Chang", "guildId": "admissions", "totalPoints": 0 },
+    { "id": 8, "name": "Nina Patel", "guildId": "admissions", "totalPoints": 0 }
+  ],
+  "tasks": [
+    { "id": 1, "title": "Process New Student Applications", "points": 50, "category": "Admissions", "repeatable": true },
+    { "id": 2, "title": "Update Employee Records", "points": 30, "category": "HR", "repeatable": true },
+    { "id": 3, "title": "Review Budget Report", "points": 100, "category": "Finance", "repeatable": true },
+    { "id": 4, "title": "IT Help Desk Tickets", "points": 40, "category": "IT", "repeatable": true },
+    { "id": 5, "title": "Data Entry - Course Catalog", "points": 60, "category": "Admissions", "repeatable": true },
+    { "id": 6, "title": "Attend a Digital Training", "points": 15, "category": "HR", "repeatable": true },
+    { "id": 7, "title": "Collaborate on a Project", "points": 20, "category": "IT", "repeatable": true },
+    { "id": 8, "title": "Submit Feedback Form", "points": 10, "category": "General", "repeatable": true },
+    { "id": 9, "title": "Policy Quiz", "points": 10, "category": "General", "repeatable": true },
+    { "id": 10, "title": "Data Cleanup", "points": 25, "category": "Finance", "repeatable": true }
+  ],
+  "countries": [
+    { "id": "usa", "name": "United States", "ownerGuildId": null, "investments": { "hr": 0, "finance": 0, "it": 0, "admissions": 0 } },
+    { "id": "can", "name": "Canada", "ownerGuildId": null, "investments": { "hr": 0, "finance": 0, "it": 0, "admissions": 0 } },
+    { "id": "gbr", "name": "United Kingdom", "ownerGuildId": null, "investments": { "hr": 0, "finance": 0, "it": 0, "admissions": 0 } },
+    { "id": "fra", "name": "France", "ownerGuildId": null, "investments": { "hr": 0, "finance": 0, "it": 0, "admissions": 0 } },
+    { "id": "deu", "name": "Germany", "ownerGuildId": null, "investments": { "hr": 0, "finance": 0, "it": 0, "admissions": 0 } },
+    { "id": "jpn", "name": "Japan", "ownerGuildId": null, "investments": { "hr": 0, "finance": 0, "it": 0, "admissions": 0 } },
+    { "id": "ind", "name": "India", "ownerGuildId": null, "investments": { "hr": 0, "finance": 0, "it": 0, "admissions": 0 } },
+    { "id": "bra", "name": "Brazil", "ownerGuildId": null, "investments": { "hr": 0, "finance": 0, "it": 0, "admissions": 0 } }
+  ]
+}
+
+
