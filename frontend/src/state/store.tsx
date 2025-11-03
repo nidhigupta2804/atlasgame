@@ -29,7 +29,9 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     (async () => {
       await initDb();
       const saved = getDb();
-      const root: RootState = { ...saved, currentUserId: null } as RootState;
+      const savedUserIdRaw = localStorage.getItem('atlasgame:currentUserId');
+      const savedUserId = savedUserIdRaw ? parseInt(savedUserIdRaw, 10) : null;
+      const root: RootState = { ...saved, currentUserId: savedUserId } as RootState;
       setState(root);
       setReady(true);
     })();
@@ -50,10 +52,12 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const login = (userId: number) => {
     const user = state.users.find(u => u.id === userId);
     if (!user) return;
+    localStorage.setItem('atlasgame:currentUserId', String(userId));
     sync({ ...state, currentUserId: userId });
   };
 
   const logout = () => {
+    localStorage.removeItem('atlasgame:currentUserId');
     sync({ ...state, currentUserId: null });
   };
 

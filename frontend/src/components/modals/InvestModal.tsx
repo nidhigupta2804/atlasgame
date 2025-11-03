@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../../components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '../../components/ui/dialog';
 import { Input } from '../../components/ui/input';
@@ -17,7 +17,14 @@ export default function InvestModal({ open, onOpenChange, countryId, countryName
   const [amount, setAmount] = useState<string>('');
 
   const max = currentUser ? currentUser.totalPoints : 0;
-  const numeric = Math.max(0, Math.min(Number(amount || 0), max));
+  const parsed = Number(amount || 0);
+  const numeric = Number.isFinite(parsed) ? Math.max(0, Math.min(parsed, max)) : 0;
+
+  useEffect(() => {
+    if (open) {
+      setAmount(String(max));
+    }
+  }, [open, max, countryId]);
 
   const onConfirm = () => {
     if (countryId && numeric > 0) {

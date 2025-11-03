@@ -31,7 +31,7 @@ import { useStore } from '../state/store';
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const { login } = useStore();
+  const { login, ready } = useStore();
   const [selectedGuild, setSelectedGuild] = useState('');
   const [selectedUser, setSelectedUser] = useState('');
 
@@ -211,7 +211,7 @@ export default function LoginPage() {
 
                       <Button 
                         onClick={handleDemoLogin}
-                        disabled={!selectedUser}
+                        disabled={!ready || !selectedUser}
                         className="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500"
                       >
                         Start Demo Quest

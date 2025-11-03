@@ -4,6 +4,7 @@ import { Badge } from './ui/badge';
 import '../styles/dashboard.css';
 import { useSelectors } from '../state/store';
 import CountriesList from './CountriesList';
+import WorldMap from './WorldMap';
 
 export default function DashboardPage() {
   const { state, currentGuild, guildLeaderboard } = useSelectors();
@@ -96,7 +97,7 @@ export default function DashboardPage() {
         </div>
 
         <div className="dashboard-main-grid">
-          {/* Map Placeholder */}
+          {/* Map */}
           <Card className="dashboard-map-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-white">
@@ -105,13 +106,7 @@ export default function DashboardPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="dashboard-map-placeholder">
-                <div className="text-center">
-                  <Globe className="w-16 h-16 mx-auto mb-4 text-indigo-400" />
-                  <p className="text-white">Interactive World Map</p>
-                  <p className="text-sm text-gray-300 mt-1">(Leaflet.js integration coming soon)</p>
-                </div>
-              </div>
+              <WorldMap />
             </CardContent>
           </Card>
 

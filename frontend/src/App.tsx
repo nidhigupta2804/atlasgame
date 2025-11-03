@@ -13,6 +13,8 @@ export default function App() {
   const { state, ready } = useStore();
   const isLoggedIn = !!state.currentUserId;
 
+  if (!ready) return null;
+
   return (
     <HashRouter>
       <div className="app-root">

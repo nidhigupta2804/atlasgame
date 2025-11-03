@@ -23,7 +23,7 @@ export async function initDb(): Promise<DbShape> {
   }
 
   // Seed from public/db.json
-  const res = await fetch('/db.json');
+  const res = await fetch(`${import.meta.env.BASE_URL}db.json`);
   if (!res.ok) throw new Error('Failed to load db.json');
   const seed: DbShape = await res.json();
   dbCache = seed;
